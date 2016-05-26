@@ -1,0 +1,1 @@
+nexe -i index.js -o ./build/server.exe
