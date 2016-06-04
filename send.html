@@ -22,7 +22,7 @@
       <textarea name="message" style="display:block;width:400px;height:80px"></textarea>
     </label>
 
-    <input type="button" onclick="send(this.form)" value="Отправить">
+    <input type="button" onclick="send(this.form)" value="Send">
   </form>
 
   <script>
@@ -48,7 +48,7 @@
 
       resetError(elems.message.parentNode);
       if (!elems.message.value) {
-        showError(elems.message.parentNode, ' Отсутствует текст.');
+        showError(elems.message.parentNode, ' No message text.');
       }
       else {
         document.location = 'http://' + window.location.host + "/save?msg=" + elems.message.value;

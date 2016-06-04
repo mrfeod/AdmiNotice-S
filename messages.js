@@ -1,5 +1,5 @@
 var Datastore = require('nedb');
-var util = require('util');
+
 exports.messages = function messages(storage, startCallback)
 {
 	var db = new Datastore({ filename: storage, autoload: true });
@@ -58,6 +58,29 @@ exports.messages = function messages(storage, startCallback)
 				}
 			});
 		},
-		getLastId: function () { return lastId; }
+		pullMessages: function (id, callback) {
+			var oneWeekAgo = new Date();
+			oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+			db.find({ _id: { $gt: parseInt(id) }, date: { $gte: oneWeekAgo.toISOString() } }, function (err, docs) {
+				if(err) {
+					console.log('Pulling Message ' + err);
+					callback(false);
+				}
+				if(docs.length > 0) {
+					var pull = [];
+					if(docs.length > 5) {
+						for (var i = 0; i < 5; i++)
+							pull.push(docs.pop());
+					}
+					else pull = docs;
+
+					callback(true, "response: " + JSON.stringify(pull));
+				}
+				else {
+					callback(false , "Nothing to pull for id " + id);
+				}
+			});
+		},
+		getLastId: function () { return lastId.get(); }
 	}
 }
