@@ -15,19 +15,19 @@ function get(response, query) {
 			}
 			else {
 				if(msg) {
-					response.writeHead(404, {"Content-Type": "text/plain"});
+					response.writeHead(404, {"Content-Type": "text/plain;charset=utf-8"});
 					response.write("404 " + msg);
 					response.end();
 				}
 				else {
-					response.writeHead(500, {"Content-Type": "text/plain"});
+					response.writeHead(500, {"Content-Type": "text/plain;charset=utf-8"});
 					response.write("500 Database was fucked up");
 					response.end();
 				}
 			}
 		});
 	else {
-		response.writeHead(406, {"Content-Type": "text/plain"});
+		response.writeHead(406, {"Content-Type": "text/plain;charset=utf-8"});
 		response.write("406 You can't request /get without specify \"id\" parametr");
 		response.end();
 	}
@@ -46,12 +46,12 @@ function pull(response, query) {
 		}
 		else {
 			if(msg) {
-				response.writeHead(404, {"Content-Type": "text/plain"});
+				response.writeHead(404, {"Content-Type": "text/plain;charset=utf-8"});
 				response.write("404 " + msg);
 				response.end();
 			}
 			else {
-				response.writeHead(500, {"Content-Type": "text/plain"});
+				response.writeHead(500, {"Content-Type": "text/plain;charset=utf-8"});
 				response.write("500 Database was fucked up");
 				response.end();
 			}
@@ -70,20 +70,20 @@ function send(response, query) {
 					if(err)
 						throw err;
 
-					response.writeHead(200, {"Content-Type": "text/html"});
+					response.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
 					response.write(html);
 					response.end();
 				});
 			}
 			else {
-				response.writeHead(403, {"Content-Type": "text/html"});
+				response.writeHead(403, {"Content-Type": "text/html;charset=utf-8"});
 				response.write("403 Forbidden");
 				response.end();
 			}
 		});
 	}
 	else {
-		response.writeHead(406, {"Content-Type": "text/plain"});
+		response.writeHead(406, {"Content-Type": "text/plain;charset=utf-8"});
 		response.write("406 You can't request /send without specify \"key\" parametr");
 		response.end();
 	}
@@ -98,12 +98,12 @@ function save(response, query) {
 
 				var message = "Message successfully saved";
 				if(result) {
-					response.writeHead(200, {"Content-Type": "text/html"});
+					response.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
 					if(id)
 						message = "Message " + id + ": \"" + query.msg + "\" - successfully saved"; 
 				}
 				else {
-					response.writeHead(500, {"Content-Type": "text/html"});
+					response.writeHead(500, {"Content-Type": "text/html;charset=utf-8"});
 					message = "500 Database was fucked up";
 				}
 
@@ -113,7 +113,7 @@ function save(response, query) {
 			});
 		});
 	else {
-		response.writeHead(406, {"Content-Type": "text/plain"});
+		response.writeHead(406, {"Content-Type": "text/plain;charset=utf-8"});
 		response.write("406 You can't request /save without specify \"msg\" parametr");
 		response.end();
 	}
