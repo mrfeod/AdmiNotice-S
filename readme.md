@@ -1,4 +1,4 @@
-AdmiNotice-S(erver)
+**AdmiNotice-S(erver)**
 
 server:port/ - request messages for last week, but no more than 5.
 server:port/pull?id=<uint> - request messages for last week, but no more than 5 and with id larger than query "id".
