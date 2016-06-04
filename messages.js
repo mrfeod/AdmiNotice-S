@@ -15,11 +15,11 @@ exports.messages = function messages(storage, startCallback)
 
 	db.count({}, function (err, count) {
 		if(err) {
-			console.log('Message module init failed: ' + err);
+			console.log('Message storage init failed: ' + err);
 			return;
 		}
 		lastId.set(count);
-		console.log('Message module inited. Last message id = ' + lastId.get() +'.');
+		console.log('Message storage initialized. Last message id = ' + lastId.get() +'.');
 		startCallback();
 	});
 

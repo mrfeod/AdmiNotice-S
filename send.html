@@ -2,31 +2,20 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-        <style>
-        td select,
-        td input {
-          width: 150px;
-        }
+  <meta charset="utf-8">
+  <style>
+    td select,
+    td input { width: 150px; }
+    label { display: block; }
 
-        label {
-          display: block;
-        }
-
-        .error input,
-        .error textarea {
-          border: 1px solid red;
-        }
-
-        .error {
-          color: red;
-        }
-    </style>
+    .error input,
+    .error textarea { border: 1px solid red; }
+    .error { color: red; }
+  </style>
+  <title>Send message</title>
 </head>
 
 <body>
-
-
   <form>
     Сообщение:
     <label>
@@ -37,6 +26,8 @@
   </form>
 
   <script>
+    history.replaceState({}, null, "/send");
+
     function showError(container, errorMessage) {
       container.className = 'error';
       var msgElem = document.createElement('span');
@@ -60,15 +51,10 @@
         showError(elems.message.parentNode, ' Отсутствует текст.');
       }
       else {
-        showError(elems.message.parentNode, window.location.href );
-       // var xhr = new XMLHttpRequest();
-        //xhr.open('GET', "http://localhot", false);
-      }
+        document.location = 'http://' + window.location.host + "/save?msg=" + elems.message.value;
+  }
 
-    }
-  </script>
-
-
+}
+</script>
 </body>
-
 </html>
