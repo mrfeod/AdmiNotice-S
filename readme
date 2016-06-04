@@ -1,7 +1,7 @@
-Клиент:
-1) Раз в 1 минуту делает запрос на сервер с хэшем последнего полученного сообщения
-2) Показывает сообщения, присланные сервером
+**AdmiNotice-S(erver)**
 
-Сервер:
-1) На запрос server:port/<hash> выдает сообщения, начиная со следующего, но не позднее чем за последнюю неделю или не больше 5.
-2) server:port/post добавляет сообщение в пулл
+server:port/ - request messages for last week, but no more than 5.
+server:port/pull?id=<uint> - request messages for last week, but no more than 5 and with id larger than query "id".
+server:port/get?id=<uint> - request message by "id".
+server:port/send?key=<string> - open send message form. Available only by secret key.
+server:port/save?msg=<string> - service request for send message from query "msg".
