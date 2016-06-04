@@ -24,7 +24,7 @@ exports.messages = function messages(storage, startCallback)
 	});
 
 	return {
-		saveMessage: function (text) {
+		saveMessage: function (text, callback) {
 			var currentTime = new Date();
 			var msg = {
 				message: text,
@@ -35,21 +35,29 @@ exports.messages = function messages(storage, startCallback)
 			db.insert(msg, function (err, newDoc) {
 				if(err) {
 					console.log('Adding Message ' + err);
-					return;
+					callback(false);
 				}
-				console.log('Add message #' + newDoc._id + ': \"' + newDoc.message + '\"');
+				else {
+					console.log('Add message #' + newDoc._id + ': \"' + newDoc.message + '\"');
+					callback(true, newDoc._id);
+				}
 			});
 		},
-		getMessage: function (id) {
+		getMessage: function (id, callback) {
 			db.findOne({ _id: parseInt(id) }, function (err, docs) {
 				if(err) {
 					console.log('Getting Message ' + err);
-					return;
+					callback(false);
 				}
 				if(docs) {
 					console.log('Get message #' + docs._id + ': \"' + docs.message + '\"');
+					callback(true, docs.message);
+				}
+				else {
+					callback(false , "Message " + id + " not found");
 				}
 			});
-		}
+		},
+		getLastId: function () { return lastId; }
 	}
 }

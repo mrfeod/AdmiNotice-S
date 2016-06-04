@@ -1,20 +1,12 @@
-var messages = require("./messages");
-var msgStorage = new messages.messages("./base.db", function (){
-	console.log('Database has initialized')
-});
-
-function route(pathname, query) {
-	if(pathname === "/send")
-	{
-		if(query.msg)
-			msgStorage.saveMessage(query.msg);
+function route(handle, pathname, query, response) {
+	if(typeof handle[pathname] === 'function') {
+		handle[pathname](response, query);
+	} else {
+		console.log("No request handler found for " + pathname);
+		response.writeHead(404, {"Content-Type": "text/plain"});
+		response.write("404 Not found");
+		response.end();
 	}
-	else if(pathname === "/get")
-	{
-		if(query.id)
-			msgStorage.getMessage(query.id);
-	}
-		console.log("About to route a request for " + pathname);
 }
 
 exports.route = route;

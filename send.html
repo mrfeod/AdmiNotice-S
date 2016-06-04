@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+        <style>
+        td select,
+        td input {
+          width: 150px;
+        }
+
+        label {
+          display: block;
+        }
+
+        .error input,
+        .error textarea {
+          border: 1px solid red;
+        }
+
+        .error {
+          color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+  <form>
+    Сообщение:
+    <label>
+      <textarea name="message" style="display:block;width:400px;height:80px"></textarea>
+    </label>
+
+    <input type="button" onclick="send(this.form)" value="Отправить">
+  </form>
+
+  <script>
+    function showError(container, errorMessage) {
+      container.className = 'error';
+      var msgElem = document.createElement('span');
+      msgElem.className = "error-message";
+      msgElem.innerHTML = errorMessage;
+      container.appendChild(msgElem);
+    }
+
+    function resetError(container) {
+      container.className = '';
+      if (container.lastChild.className == "error-message") {
+        container.removeChild(container.lastChild);
+      }
+    }
+
+    function send(form) {
+      var elems = form.elements;
+
+      resetError(elems.message.parentNode);
+      if (!elems.message.value) {
+        showError(elems.message.parentNode, ' Отсутствует текст.');
+      }
+      else {
+        showError(elems.message.parentNode, window.location.href );
+       // var xhr = new XMLHttpRequest();
+        //xhr.open('GET', "http://localhot", false);
+      }
+
+    }
+  </script>
+
+
+</body>
+
+</html>
