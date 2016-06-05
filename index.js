@@ -1,6 +1,6 @@
-var server = require("./server");
-var router = require("./router");
-var requestHandlers = require("./requestHandlers");
+var server = require("./lib/server");
+var router = require("./lib/router");
+var requestHandlers = require("./lib/requestHandlers");
 
 var handle = {}
 handle["/"] = requestHandlers.pull;
