@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <style>
     td select,
     td input { width: 150px; }
@@ -16,12 +16,9 @@
 </head>
 
 <body>
-  <form>
+  <form accept-charset="UTF-8">
     Сообщение:
-    <label>
-      <textarea name="message" style="display:block;width:400px;height:80px"></textarea>
-    </label>
-
+    <textarea name="message" style="display:block;width:400px;height:80px"></textarea>
     <input type="button" onclick="send(this.form)" value="Send">
   </form>
 
