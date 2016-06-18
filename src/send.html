@@ -40,6 +40,10 @@
       }
     }
 
+function nl2br( str ) {
+    return str.replace(/([^>])\n/g, '$1<br/>');
+}
+
     function send(form) {
       var elems = form.elements;
 
@@ -48,7 +52,7 @@
         showError(elems.message.parentNode, ' No message text.');
       }
       else {
-        document.location = 'http://' + window.location.host + "/save?msg=" + elems.message.value;
+        document.location = 'http://' + window.location.host + "/save?msg=" + nl2br(elems.message.value);
   }
 
 }
